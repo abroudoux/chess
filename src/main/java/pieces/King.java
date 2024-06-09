@@ -12,10 +12,8 @@ public class King extends Piece {
         this.row = row;
         this.xPos = col * board.titleSize;
         this.yPos = row * board.titleSize;
-
         this.isWhite = isWhite;
         this.name = "King";
-
-        this.sprite = sheet.getSubimage(0 * sheetScale, isWhite ? 0 : sheetScale, sheetScale, sheetScale).getScaledInstance(board.titleSize, board.titleSize, BufferedImage.SCALE_SMOOTH);
+        this.sprite = sheet.getSubimage(0 , isWhite ? 0 : sheetScale, sheetScale, sheetScale).getScaledInstance(board.titleSize, board.titleSize, BufferedImage.SCALE_SMOOTH);
     }
 }

@@ -20,46 +20,8 @@ public class Board extends JPanel {
     int rows = 8;
 
     ArrayList<Piece> pieceList = new ArrayList<>();
-
     public Piece selectedPiece;
-
     Input input = new Input(this);
-
-    public Board() {
-        this.setPreferredSize(new Dimension(cols * titleSize, rows * titleSize));
-        this.addMouseListener(input);
-        this.addMouseMotionListener(input);
-
-        addPiece();
-    }
-
-    public void addPiece() {
-        pieceList.add(new Knight(this, 1, 0, false));
-        pieceList.add(new Knight(this, 6, 0, false));
-        pieceList.add(new Knight(this, 1, 7, true));
-        pieceList.add(new Knight(this, 6, 7, true));
-
-        pieceList.add(new Bishop(this, 2, 0, false));
-        pieceList.add(new Bishop(this, 5, 0, false));
-        pieceList.add(new Bishop(this, 2, 7, true));
-        pieceList.add(new Bishop(this, 5, 7, true));
-
-        pieceList.add(new Queen(this, 3, 0, false));
-        pieceList.add(new Queen(this, 3, 7, true));
-
-        pieceList.add(new King(this, 4, 0, false));
-        pieceList.add(new King(this, 4, 7, true));
-
-        for (int i = 0; i < cols; i++) {
-            pieceList.add(new Pawn(this, i, 1, false));
-            pieceList.add(new Pawn(this, i, 6, true));
-        }
-
-        pieceList.add(new Rook(this, 0, 0, false));
-        pieceList.add(new Rook(this, 7, 0, false));
-        pieceList.add(new Rook(this, 0, 7, true));
-        pieceList.add(new Rook(this, 7, 7, true));
-    }
 
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -110,5 +72,41 @@ public class Board extends JPanel {
             return false;
         }
         return piece1.isWhite == piece2.isWhite;
+    }
+
+    public void addPiece() {
+        pieceList.add(new Knight(this, 1, 0, false));
+        pieceList.add(new Knight(this, 6, 0, false));
+        pieceList.add(new Knight(this, 1, 7, true));
+        pieceList.add(new Knight(this, 6, 7, true));
+
+        pieceList.add(new Bishop(this, 2, 0, false));
+        pieceList.add(new Bishop(this, 5, 0, false));
+        pieceList.add(new Bishop(this, 2, 7, true));
+        pieceList.add(new Bishop(this, 5, 7, true));
+
+        pieceList.add(new Queen(this, 3, 0, false));
+        pieceList.add(new Queen(this, 3, 7, true));
+
+        pieceList.add(new King(this, 4, 0, false));
+        pieceList.add(new King(this, 4, 7, true));
+
+        for (int i = 0; i < cols; i++) {
+            pieceList.add(new Pawn(this, i, 1, false));
+            pieceList.add(new Pawn(this, i, 6, true));
+        }
+
+        pieceList.add(new Rook(this, 0, 0, false));
+        pieceList.add(new Rook(this, 7, 0, false));
+        pieceList.add(new Rook(this, 0, 7, true));
+        pieceList.add(new Rook(this, 7, 7, true));
+    }
+
+    public Board() {
+        this.setPreferredSize(new Dimension(cols * titleSize, rows * titleSize));
+        this.addMouseListener(input);
+        this.addMouseMotionListener(input);
+
+        addPiece();
     }
  }

@@ -12,7 +12,6 @@ public class Piece {
 
     public int row, col;
     public int xPos, yPos;
-
     public boolean isWhite;
     public String name;
     public int value;
