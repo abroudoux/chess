@@ -21,8 +21,14 @@ public class Board extends JPanel {
 
     ArrayList<Piece> pieceList = new ArrayList<>();
 
+    public Piece selectedPiece;
+
+    Input input = new Input(this);
+
     public Board() {
         this.setPreferredSize(new Dimension(cols * titleSize, rows * titleSize));
+        this.addMouseListener(input);
+        this.addMouseMotionListener(input);
         addPiece();
     }
 
@@ -66,5 +72,42 @@ public class Board extends JPanel {
         for (Piece piece : pieceList) {
             piece.paint(g2d);
         }
+    }
+
+    public Piece getPiece(int col, int row) {
+        for (Piece piece : pieceList) {
+            if (piece.row == row && piece.col == col) {
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    public boolean isValidMove(Move move) {
+        if (sameTeam(move.piece, move.capture)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void makeMove(Move move) {
+        move.piece.row = move.newRow;
+        move.piece.col = move.newCol;
+        move.piece.xPos = move.newCol * titleSize;
+        move.piece.yPos = move.newRow * titleSize;
+
+        capture(move);
+    }
+
+    public void capture(Move move) {
+        pieceList.remove(move.capture);
+    }
+
+    public boolean sameTeam(Piece piece1, Piece piece2) {
+        if (piece1 == null || piece2 == null) {
+            return false;
+        }
+        return piece1.isWhite == piece2.isWhite;
     }
  }
