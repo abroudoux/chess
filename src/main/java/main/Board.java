@@ -29,6 +29,7 @@ public class Board extends JPanel {
         this.setPreferredSize(new Dimension(cols * titleSize, rows * titleSize));
         this.addMouseListener(input);
         this.addMouseMotionListener(input);
+
         addPiece();
     }
 

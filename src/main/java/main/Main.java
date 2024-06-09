@@ -14,6 +14,5 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.add(board);
         frame.setVisible(true);
-
     }
 }
