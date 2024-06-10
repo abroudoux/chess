@@ -60,9 +60,18 @@ public class Board extends JPanel {
     }
 
     public boolean isValidMove(Move move, Piece selectedPiece) {
+        if (move.newRow < 0 || move.newRow >= rows || move.newCol < 0 || move.newCol >= cols) {
+            return false;
+        }
+
+        if (move.newCol == move.oldCol && move.newRow == move.oldRow) {
+            return false;
+        }
+
         if (selectedPiece.isWhite != whiteTurn) {
             return false;
         }
+
         whiteTurn = !whiteTurn;
         setTitle(whiteTurn);
         return !sameTeam(move.piece, move.capture);
