@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Board extends JPanel {
 
-    public int titleSize = 85;
+    public int titleSize = 80;
 
     int cols = 8;
     int rows = 8;
@@ -22,7 +22,9 @@ public class Board extends JPanel {
     ArrayList<Piece> pieceList = new ArrayList<>();
     public Piece selectedPiece;
     Input input = new Input(this);
+    boolean whiteTurn = true;
 
+    @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
@@ -31,6 +33,17 @@ public class Board extends JPanel {
                 g2d.setColor((c + r) % 2 == 0 ? new Color(227, 198, 181) : new Color(157, 105, 53));
                 g2d.fillRect(c * titleSize, r * titleSize, titleSize, titleSize);
             }
+
+        /**
+        if (selectedPiece != null)
+        for (int r = 0; r < rows; r++)
+            for (int c = 0; c < cols; c++) {
+                if (isValidMove(new Move(this, selectedPiece, c, r))) {
+                    g2d.setColor(new Color(0, 255, 0, 100));
+                    g2d.fillRect(c * titleSize, r * titleSize, titleSize, titleSize);
+                }
+            }
+        **/
 
         for (Piece piece : pieceList) {
             piece.paint(g2d);
@@ -46,12 +59,12 @@ public class Board extends JPanel {
         return null;
     }
 
-    public boolean isValidMove(Move move) {
-        if (sameTeam(move.piece, move.capture)) {
+    public boolean isValidMove(Move move, Piece selectedPiece) {
+        if (selectedPiece.isWhite != whiteTurn) {
             return false;
         }
-
-        return true;
+        whiteTurn = !whiteTurn;
+        return !sameTeam(move.piece, move.capture);
     }
 
     public void makeMove(Move move) {

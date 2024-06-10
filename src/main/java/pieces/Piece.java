@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.awt.Graphics2D;
+import java.util.Objects;
 
 public class Piece {
 
@@ -19,12 +20,12 @@ public class Piece {
     BufferedImage sheet;
     {
         try {
-            sheet = ImageIO.read(ClassLoader.getSystemResourceAsStream("pieces.png"));
+            sheet = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("pieces.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    protected int sheetScale = sheet.getWidth()/6;
+    protected int sheetScale = sheet.getWidth() / 6;
 
     Image sprite;
     Board board;
@@ -32,7 +33,6 @@ public class Piece {
     public Piece(Board board) {
         this.board = board;
     }
-
     public void paint(Graphics2D g2d) {
         g2d.drawImage(sprite, xPos, yPos, null);
     }
