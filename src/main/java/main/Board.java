@@ -34,7 +34,7 @@ public class Board extends JPanel {
                 g2d.fillRect(c * titleSize, r * titleSize, titleSize, titleSize);
             }
 
-        /**
+        /*
         if (selectedPiece != null)
         for (int r = 0; r < rows; r++)
             for (int c = 0; c < cols; c++) {
@@ -64,6 +64,7 @@ public class Board extends JPanel {
             return false;
         }
         whiteTurn = !whiteTurn;
+        setTitle(whiteTurn);
         return !sameTeam(move.piece, move.capture);
     }
 
@@ -121,5 +122,14 @@ public class Board extends JPanel {
         this.addMouseMotionListener(input);
 
         addPiece();
+    }
+
+    public void setTitle(boolean whiteTurn) {
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        if (whiteTurn) {
+            frame.setTitle("White's Turn !");
+        } else {
+            frame.setTitle("Black's Turn !");
+        }
     }
  }
